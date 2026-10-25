@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en" data-role="professor"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QuizPresent · Professor</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><main>
+<div class="card" id="login"><h2>Professor login</h2>
+<label class="mute">Username<input type="text" id="li-user" autocomplete="username"></label>
+<label class="mute" style="display:block;margin-top:10px">Password<input type="password" id="li-pass" autocomplete="current-password" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit"></label>
+<div class="row" style="margin-top:12px"><button class="b" id="li-go">Log in</button></div>
+<p class="bad" id="li-err" style="margin-top:10px"></p></div>
+<div id="app" hidden>
+<div class="row" style="justify-content:space-between"><h1>QuizPresent · Professor</h1><button class="b alt" id="logout">Log out</button></div><p class="mute" id="sub">Connecting…</p>
+<div class="card"><h2>Start the lecture</h2>
+<label class="mute">Lecture<select id="lecture"></select></label>
+<div class="row" style="margin-top:10px">
+<label class="mute">Classroom beacon name<input type="text" id="beacon" value="QuizPresent-Room101"></label>
+<label class="mute">Beacon secret<input type="text" id="secret" value="change-me-123"></label></div>
+<div class="row" style="margin-top:12px"><button class="b" id="start">Start lecture</button><button class="b alt" id="gen" disabled>End and generate quiz</button><button class="b alt" id="reset" disabled>Reset session</button></div>
+<p class="mute" id="demo" hidden>Demo mode: Bluetooth is simulated (no beacon needed). Change DEMO_BLE in js/config.js.</p>
+<div id="live" style="margin-top:12px"></div></div>
+<div class="card"><h2>Pass marks</h2>
+<div class="row"><span class="tag c">In class</span> needs <b id="tc">4</b> of 5 <button class="b alt" data-k="c" data-d="1">+</button><button class="b alt" data-k="c" data-d="-1">−</button></div>
+<div class="row" style="margin-top:8px"><span class="tag r">Remote</span> needs <b id="tr">3</b> of 5 <button class="b alt" data-k="r" data-d="1">+</button><button class="b alt" data-k="r" data-d="-1">−</button></div>
+<p class="mute" style="margin-top:10px">Changes reach students instantly.</p></div>
+<div class="card"><h2>Attendance for this lecture</h2><p class="mute" id="count">No session yet.</p>
+<div class="scroll"><table><thead><tr><th>Student</th><th>Mode</th><th>Beacon</th><th>Proctoring</th><th>Score</th><th>Status</th><th>Override</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</div></main><script type="module" src="js/professor.js"></script></body></html>

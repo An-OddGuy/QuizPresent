@@ -1,0 +1,30 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "sessions": {
+      "$code": {
+        ".write": "root.child('sessions').child($code).child('meta').child('owner').val() === auth.uid",
+        "meta": {
+          ".read": "auth != null",
+          ".write": "!data.exists() && newData.child('owner').val() === auth.uid && auth.token.email.endsWith('@quizpresent.app')"
+        },
+        "quiz": { ".read": "auth != null" },
+        "blocked": { "$prn": { ".read": "auth != null", ".write": "!data.exists() && newData.val() === true" } },
+        "key": { ".read": "root.child('sessions').child($code).child('meta').child('owner').val() === auth.uid" },
+        "students": {
+          ".read": "root.child('sessions').child($code).child('meta').child('owner').val() === auth.uid",
+          "$sid": { ".read": "$sid.beginsWith(auth.uid + '_')", ".write": "$sid.beginsWith(auth.uid + '_')" }
+        },
+        "grades": {
+          ".read": "root.child('sessions').child($code).child('meta').child('owner').val() === auth.uid",
+          "$sid": { ".read": "$sid.beginsWith(auth.uid + '_')" }
+        },
+        "over": {
+          ".read": "root.child('sessions').child($code).child('meta').child('owner').val() === auth.uid",
+          "$sid": { ".read": "$sid.beginsWith(auth.uid + '_')" }
+        }
+      }
+    }
+  }
+}

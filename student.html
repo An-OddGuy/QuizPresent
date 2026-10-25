@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QuizPresent · Student</title><link rel="stylesheet" href="assets/style.css"></head>
+<body><main>
+<h1>QuizPresent · Student</h1><p class="mute">Attend by proving you know the lecture.</p>
+<div class="card" id="s0"><h2>Join the lecture</h2>
+<div class="row"><label class="mute">Lecture code<input type="text" id="code" maxlength="4" placeholder="ABCD"></label><label class="mute">Your name<input type="text" id="name" placeholder="Your name"></label><label class="mute">PRN<input type="text" id="prn" inputmode="numeric" placeholder="e.g. 24070127042"></label></div>
+<div class="row" style="margin-top:12px"><button class="b" id="join">Join</button></div><p class="bad" id="jerr"></p></div>
+<div class="card" id="s1" hidden><h2>Connect</h2>
+<p id="status" class="mute"></p>
+<div class="row"><button class="b" id="c-in" disabled>I'm in the room (Bluetooth)</button><button class="b alt" id="c-rem" disabled>I'm remote (proctored)</button></div>
+<p class="mute" id="msg" style="margin-top:8px"></p>
+<div id="setup" hidden style="margin-top:10px"><p class="mute">Remote mode uses your camera for face and eye tracking on this device. No video is uploaded; only counters like “looked away 6%” are shared with your professor. The quiz runs fullscreen. Leaving fullscreen, switching tab or window ends the attempt immediately: it fails, is reported to your professor, and your PRN is blocked for this test. There are no second chances.</p>
+<button class="b" id="c-go">Enable camera and start quiz</button><p class="mute" id="pmsg"></p></div></div>
+<div class="card" id="s2" hidden><div class="row" style="justify-content:space-between"><span id="modetag" class="tag"></span><span class="timer" id="timer">8:00</span></div>
+<p id="modehelp" class="mute" style="margin-top:8px"></p><p class="bad" id="note"></p><div id="quiz"></div><button class="b" id="submit">Submit quiz</button></div>
+<div class="card" id="s3" hidden><h2 id="res-h"></h2><p id="res-p"></p></div>
+</main>
+<video id="cam" class="cam" muted playsinline hidden></video>
+<script type="module" src="js/student.js"></script></body></html>
