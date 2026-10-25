@@ -8,10 +8,7 @@ export const db = getDatabase(app);
 // Professor page needs a real (email/password) login; student page uses anonymous auth.
 const PROF = document.documentElement.dataset.role === "professor";
 export const ready = new Promise(res => onAuthStateChanged(auth, u => { if (u && (PROF ? !u.isAnonymous : u.isAnonymous)) res(u); }));
-if (!PROF) signInAnonymously(auth).catch(e => {
-  console.error(e);
-  alert("Firebase sign-in failed: " + e.code + "\n" + e.message);
-});
+if (!PROF) signInAnonymously(auth).catch(e => { console.error(e); alert("Firebase sign-in failed. Check your env values and that Anonymous sign-in is enabled."); });
 // "username" is mapped to a fake email so Firebase's email/password auth can be used.
 export const loginProfessor = (user, pw) => signInWithEmailAndPassword(auth, `${user.trim().toLowerCase()}@quizpresent.app`, pw);
 export const logout = async () => { await signOut(auth); location.reload(); };

@@ -1,4 +1,4 @@
-import { ready, db, ref, set, update, remove, onValue, loginProfessor, logout } from "./firebase.js";
+import { ready, db, ref, set, update, remove, get, onValue, loginProfessor, logout } from "./firebase.js";
 import { LECTURES } from "./quizbank.js";
 import { DEMO_BLE } from "./config.js";
 import { evaluate, fresh } from "./rules.js";
@@ -17,6 +17,10 @@ $("li-go").onclick = doLogin;
 $("li-pass").onkeydown = e => { if (e.key === "Enter") doLogin(); };
 $("logout").onclick = logout;
 const uid = (await ready).uid;
+// Only accounts whitelisted under /professors/<uid> (added by hand in the Firebase console) may use this page.
+if (!(await get(ref(db, `professors/${uid}`)).then(s => s.val() === true).catch(() => false))) {
+  alert("This account is not authorised as a professor."); await logout();
+}
 $("login").hidden = true; $("app").hidden = false;
 $("lecture").innerHTML = LECTURES.map((l, i) => `<option value="${i}">${l.title}</option>`).join(""); $("demo").hidden = !DEMO_BLE;
 $("sub").textContent = "Connected. Start a lecture to get a join code.";
